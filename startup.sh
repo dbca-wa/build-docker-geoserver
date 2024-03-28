@@ -78,5 +78,14 @@ if [ "${CORS_ENABLED}" = "true" ]; then
   fi
 fi
 
+# Start the nginx server
+service nginx start &
+status=$?
+if [ $status -ne 0 ]; then
+  echo "Failed to start apache2: $status"
+  exit $status
+fi
+bash
+
 # start the tomcat
 exec $CATALINA_HOME/bin/catalina.sh run
