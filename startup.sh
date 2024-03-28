@@ -82,10 +82,9 @@ fi
 service nginx start &
 status=$?
 if [ $status -ne 0 ]; then
-  echo "Failed to start apache2: $status"
+  echo "Failed to start nginx: $status"
   exit $status
 fi
-bash
 
 # start the tomcat
 exec $CATALINA_HOME/bin/catalina.sh run
