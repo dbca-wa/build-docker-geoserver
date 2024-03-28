@@ -43,8 +43,6 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VERSION}/b
 && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps/docs \
 && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps/examples
 
-
-
 # cleanup
 RUN apt purge -y  \
 && apt autoremove --purge -y \
@@ -105,10 +103,6 @@ COPY $GS_DATA_PATH $GEOSERVER_DATA_DIR
 COPY $ADDITIONAL_LIBS_PATH $GEOSERVER_LIB_DIR
 COPY $ADDITIONAL_FONTS_PATH /usr/share/fonts/truetype/
 
-# load custom tomcat web.xml
-RUN mv /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml-orginal
-COPY web.xml /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml
-
 # cleanup
 RUN rm -rf /tmp/*
 
@@ -116,6 +110,10 @@ RUN rm -rf /tmp/*
 COPY *.sh /opt/
 RUN chmod +x /opt/*.sh
 
+RUN mkdir /tmp/ogcapi/ && cd /tmp/ogcapi && wget https://build.geoserver.org/geoserver/2.23.x/community-latest/geoserver-2.23-SNAPSHOT-ogcapi-plugin.zip && unzip geoserver-2.23-SNAPSHOT-ogcapi-plugin.zip
+RUN mv /tmp/ogcapi/* $GEOSERVER_LIB_DIR
+
 ENTRYPOINT ["/opt/startup.sh"]
 HEALTHCHECK --interval=10s --timeout=30s CMD curl -f "http://localhost:8080/geoserver/web" || exit
 WORKDIR /opt
+
