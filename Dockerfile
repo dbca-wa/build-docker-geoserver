@@ -43,6 +43,9 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VERSION}/b
 && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps/docs \
 && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps/examples
 
+RUN mv /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml-orginal
+COPY web.xml /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml
+
 # cleanup
 RUN apt purge -y  \
 && apt autoremove --purge -y \
