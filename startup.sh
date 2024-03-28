@@ -78,6 +78,9 @@ if [ "${CORS_ENABLED}" = "true" ]; then
   fi
 fi
 
+# Map geoserver node url from environment variable
+sed -i -e "s/GEOSERVER_NODE_URL/$GEOSERVER_NODE_URL/g" /etc/nginx/sites-enabled/sites.conf
+
 # Start the nginx server
 service nginx start &
 status=$?
