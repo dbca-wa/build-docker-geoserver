@@ -115,7 +115,7 @@ RUN mv /tmp/ogcapi/* $GEOSERVER_LIB_DIR
 
 
 # NGINX Config
-COPY sites.conf /etc/nginx/sites-enabled/
+COPY sites.conf /etc/nginx/sites-enabled/default
 
 ENTRYPOINT ["/opt/startup.sh"]
 HEALTHCHECK --interval=10s --timeout=30s CMD curl -f "http://localhost:8080/geoserver/web" || exit
