@@ -113,6 +113,7 @@ RUN chmod +x /opt/*.sh
 RUN mkdir /tmp/ogcapi/ && cd /tmp/ogcapi && wget https://build.geoserver.org/geoserver/2.23.x/community-latest/geoserver-2.23-SNAPSHOT-ogcapi-plugin.zip && unzip geoserver-2.23-SNAPSHOT-ogcapi-plugin.zip
 RUN mv /tmp/ogcapi/* $GEOSERVER_LIB_DIR
 
+COPY web.xml /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml
 
 # NGINX Config
 COPY sites.conf /etc/nginx/sites-enabled/default
