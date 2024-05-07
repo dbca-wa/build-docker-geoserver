@@ -74,10 +74,6 @@ if [ "${CORS_ENABLED}" = "true" ]; then
         <param-name>cors.exposed.headers</param-name>\n\
         <param-value>${CORS_EXPOSED_HEADERS}</param-value>\n\
       </init-param>\n\
-      <init-param>\n\
-        <param-name>cors.support.credentials</param-name>\n\
-        <param-value>${CORS_SUPPORT_CREDENTIALS}</param-value>\n\
-      </init-param>\n\
     </filter>\n\
     <filter-mapping>\n\
       <filter-name>DockerGeoServerCorsFilter</filter-name>\n\
@@ -85,6 +81,11 @@ if [ "${CORS_ENABLED}" = "true" ]; then
     </filter-mapping>" "$CATALINA_HOME/webapps/geoserver/WEB-INF/web.xml";
   fi
 fi
+
+#      <init-param>\n\
+#        <param-name>cors.support.credentials</param-name>\n\
+#        <param-value>${CORS_SUPPORT_CREDENTIALS}</param-value>\n\
+#      </init-param>\n\
 
 # Map geoserver node url from environment variable
 sed -i -e "s/GEOSERVER_NODE_URL/$GEOSERVER_NODE_URL/g" /etc/nginx/sites-enabled/default
