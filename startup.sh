@@ -70,6 +70,14 @@ if [ "${CORS_ENABLED}" = "true" ]; then
         <param-name>cors.allowed.headers</param-name>\n\
         <param-value>${CORS_ALLOWED_HEADERS}</param-value>\n\
       </init-param>\n\
+      <init-param>\n\
+        <param-name>cors.exposed.headers</param-name>\n\
+        <param-value>${CORS_EXPOSED_HEADERS}</param-value>\n\
+      </init-param>\n\
+      <init-param>\n\
+        <param-name>cors.support.credentials</param-name>\n\
+        <param-value>${CORS_SUPPORT_CREDENTIALS}</param-value>\n\
+      </init-param>\n\
     </filter>\n\
     <filter-mapping>\n\
       <filter-name>DockerGeoServerCorsFilter</filter-name>\n\
