@@ -33,10 +33,11 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
 # init
 RUN apt update \
 && apt -y upgrade \
-&& apt install -y --no-install-recommends openssl unzip gdal-bin wget curl openjdk-11-jdk vim ssh nginx\
+&& apt install -y --no-install-recommends openssl unzip gdal-bin wget curl openjdk-11-jdk vim ssh \
 && apt clean \
 && rm -rf /var/cache/apt/* \
 && rm -rf /var/lib/apt/lists/*
+# removed nginx
 
 WORKDIR /opt/
 
@@ -120,7 +121,7 @@ RUN mv /tmp/ogcapi/* $GEOSERVER_LIB_DIR
 #COPY web.xml /opt/apache-tomcat-9.0.75/webapps/geoserver/WEB-INF/web.xml
 
 # NGINX Config
-COPY sites.conf /etc/nginx/sites-enabled/default
+# COPY sites.conf /etc/nginx/sites-enabled/default
 
 ENTRYPOINT ["/opt/startup.sh"]
 HEALTHCHECK --interval=10s --timeout=30s CMD curl -f "http://localhost:8080/geoserver/web" || exit
