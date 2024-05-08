@@ -87,17 +87,18 @@ fi
 #        <param-value>${CORS_SUPPORT_CREDENTIALS}</param-value>\n\
 #      </init-param>\n\
 
+# START Disabled nginx in docker
+# # Map geoserver node url from environment variable
+# sed -i -e "s/GEOSERVER_NODE_URL/$GEOSERVER_NODE_URL/g" /etc/nginx/sites-enabled/default
 
-# Map geoserver node url from environment variable
-sed -i -e "s/GEOSERVER_NODE_URL/$GEOSERVER_NODE_URL/g" /etc/nginx/sites-enabled/default
-
-# Start the nginx server
-service nginx start &
-status=$?
-if [ $status -ne 0 ]; then
-  echo "Failed to start nginx: $status"
-  exit $status
-fi
+# # Start the nginx server
+# service nginx start &
+# status=$?
+# if [ $status -ne 0 ]; then
+#   echo "Failed to start nginx: $status"
+#   exit $status
+# fi
+# END Disabled nginx in docker
 
 # start the tomcat
 exec $CATALINA_HOME/bin/catalina.sh run
