@@ -122,6 +122,10 @@ RUN mv /tmp/ogcapi/* $GEOSERVER_LIB_DIR
 # NGINX Config
 COPY sites.conf /etc/nginx/sites-enabled/default
 
+# kubernetes health checks script
+RUN wget https://raw.githubusercontent.com/dbca-wa/wagov_utils/main/wagov_utils/bin/health_check.sh -O /bin/health_check.sh
+RUN chmod 755 /bin/health_check.sh
+
 ENTRYPOINT ["/opt/startup.sh"]
 HEALTHCHECK --interval=10s --timeout=30s CMD curl -f "http://localhost:8080/geoserver/web" || exit
 WORKDIR /opt
