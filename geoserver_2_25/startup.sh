@@ -93,6 +93,14 @@ fi
 
 # Start the nginx server
 #service nginx start &
+
+if [ -d "/container/logs" ]
+then
+   echo "Directory Exists /container/logs"
+else
+   sudo mkdir "/container/logs"
+fi
+
 nginx -c /etc/nginx/nginx-container.conf
 status=$?
 if [ $status -ne 0 ]; then
