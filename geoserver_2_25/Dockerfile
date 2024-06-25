@@ -32,7 +32,7 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
 # init
 RUN apt update \
     && apt -y upgrade \
-    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext \
+    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx\
     && apt clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
@@ -41,6 +41,13 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 RUN groupadd -g 5000 oim
 RUN useradd -g 5000 -u 5000 oim -s /bin/bash -d /opt
 RUN usermod -a -G sudo oim
+
+# NGINX Config
+COPY sites.conf /etc/nginx/sites-enabled/default
+
+# kubernetes health checks script
+RUN wget https://raw.githubusercontent.com/dbca-wa/wagov_utils/main/wagov_utils/bin/health_check.sh -O /bin/health_check.sh
+RUN chmod 755 /bin/health_check.sh
 
 
 WORKDIR /opt/
