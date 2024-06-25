@@ -101,6 +101,14 @@ else
    sudo mkdir "/container/logs"
 fi
 
+if [ -d "/container/logs/nginx" ]
+then
+   echo "Directory Exists /container/logs/nginx"
+else
+   sudo mkdir "/container/logs/nginx"
+fi
+
+
 nginx -c /etc/nginx/nginx-container.conf
 status=$?
 if [ $status -ne 0 ]; then
