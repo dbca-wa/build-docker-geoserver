@@ -92,7 +92,8 @@ fi
 # sed -i -e "s/GEOSERVER_NODE_URL/$GEOSERVER_NODE_URL/g" /etc/nginx/sites-enabled/default
 
 # Start the nginx server
-service nginx start &
+#service nginx start &
+nginx -c /etc/nginx/nginx-container.conf
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start nginx: $status"

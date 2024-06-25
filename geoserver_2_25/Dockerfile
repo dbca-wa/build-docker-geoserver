@@ -43,7 +43,8 @@ RUN useradd -g 5000 -u 5000 oim -s /bin/bash -d /opt
 RUN usermod -a -G sudo oim
 
 # NGINX Config
-COPY sites.conf /etc/nginx/sites-enabled/default
+#COPY sites.conf /etc/nginx/sites-enabled/default
+COPY nginx.conf /etc/nginx/nginx-container.conf
 
 # kubernetes health checks script
 RUN wget https://raw.githubusercontent.com/dbca-wa/wagov_utils/main/wagov_utils/bin/health_check.sh -O /bin/health_check.sh
