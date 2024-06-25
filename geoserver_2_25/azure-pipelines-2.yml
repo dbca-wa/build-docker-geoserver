@@ -27,7 +27,7 @@ stages:
       displayName: Build an image and Push
       inputs:
         command: buildAndPush
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_25/Dockerfile'
         tags: | 
               latest
               $(tagDate)
