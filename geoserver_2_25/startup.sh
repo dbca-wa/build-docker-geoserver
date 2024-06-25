@@ -98,14 +98,14 @@ if [ -d "/container/logs" ]
 then
    echo "Directory Exists /container/logs"
 else
-   sudo mkdir "/container/logs"
+   mkdir "/container/logs"
 fi
 
 if [ -d "/container/logs/nginx" ]
 then
    echo "Directory Exists /container/logs/nginx"
 else
-   sudo mkdir "/container/logs/nginx"
+   mkdir "/container/logs/nginx"
 fi
 
 
