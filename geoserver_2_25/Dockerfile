@@ -172,7 +172,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chmod +x /opt/*.sh && sed -i 's/\r$//' /opt/startup.sh
 RUN chown -R oim.oim /opt/ 
 RUN mkdir /geoserver_scripts
-COPY scripts/requirements.txt /geoserver_scripts
+COPY ./scripts/requirements.txt /geoserver_scripts
 RUN pip install -r /geoserver_scripts/requirements.txt
 
 USER oim
