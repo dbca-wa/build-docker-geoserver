@@ -169,6 +169,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 # GeoServer user => restrict access to $CATALINA_HOME and GeoServer directories
 # See also CIS Docker benchmark and docker best practices
 RUN chmod +x /opt/*.sh && sed -i 's/\r$//' /opt/startup.sh
+RUN chown -R oim.oim /opt/ 
 USER oim
 ENTRYPOINT ["bash", "/opt/startup.sh"]
 
