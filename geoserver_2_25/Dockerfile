@@ -37,6 +37,7 @@ RUN apt update \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
 
+RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 RUN groupadd -g 5000 oim
 RUN useradd -g 5000 -u 5000 oim -s /bin/bash -d /opt
