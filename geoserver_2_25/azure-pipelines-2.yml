@@ -30,7 +30,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/geoserver_2_25/Dockerfile'
         tags: | 
               latest
-              $(tagDate)
+              $(tagDate)_ver2.25
         containerRegistry: DockerHub
         repository: dbcawa/appsteam-geoserver
       env:
