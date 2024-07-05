@@ -32,10 +32,11 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
 # init
 RUN apt update \
     && apt -y upgrade \
-    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx python3 python3-pip\
+    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx \
     && apt clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
+RUN apt install -y --no-install-recommends  python3 python3-pip python3-setuptools python3-dev
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 RUN groupadd -g 5000 oim
