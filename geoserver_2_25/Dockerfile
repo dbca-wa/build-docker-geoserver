@@ -32,7 +32,7 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
 # init
 RUN apt update \
     && apt -y upgrade \
-    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx \
+    && apt-get install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx \
     && apt clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
