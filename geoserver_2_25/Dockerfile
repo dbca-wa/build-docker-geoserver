@@ -32,11 +32,10 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
 # init
 RUN apt update \
     && apt -y upgrade \
-    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx \
-    && apt clean \
-    && rm -rf /var/cache/apt/* \
-    && rm -rf /var/lib/apt/lists/*
-RUN apt install -y python3 python3-pip python3-setuptools python3-dev
+    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx 
+RUN apt install -y python3 python3-pip python3-setuptools python3-dev python3-requests
+
+RUN apt clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/*
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 RUN groupadd -g 5000 oim
@@ -172,11 +171,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chmod +x /opt/*.sh && sed -i 's/\r$//' /opt/startup.sh
 RUN chown -R oim.oim /opt/ 
 RUN mkdir /geoserver_scripts
-COPY ./scripts/requirements.txt /geoserver_scripts/requirements.txt
-
-RUN ls -al /
-RUN ls -al /geoserver_scripts
-RUN pip3 install -r /geoserver_scripts/requirements.txt
+COPY ./scripts/* /geoserver_scripts/
 
 USER oim
 ENTRYPOINT ["bash", "/opt/startup.sh"]
