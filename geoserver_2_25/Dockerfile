@@ -175,7 +175,7 @@ COPY ./scripts/requirements.txt /geoserver_scripts/requirements.txt
 
 RUN ls -al /
 RUN ls -al /geoserver_scripts
-RUN pip install -r /geoserver_scripts/requirements.txt
+RUN pip3 install -r /geoserver_scripts/requirements.txt
 
 USER oim
 ENTRYPOINT ["bash", "/opt/startup.sh"]
