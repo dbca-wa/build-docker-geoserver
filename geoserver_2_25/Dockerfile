@@ -172,6 +172,9 @@ RUN chmod +x /opt/*.sh && sed -i 's/\r$//' /opt/startup.sh
 RUN chown -R oim.oim /opt/ 
 RUN mkdir /geoserver_scripts
 COPY ./scripts/requirements.txt /geoserver_scripts/requirements.txt
+
+RUN ls -al /
+RUN ls -al /geoserver_scripts
 RUN pip install -r /geoserver_scripts/requirements.txt
 
 USER oim
