@@ -32,11 +32,12 @@ ENV CATALINA_OPTS="\$EXTRA_JAVA_OPTS \
 # init
 RUN apt update \
     && apt -y upgrade \
-    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx python3\
+    && apt install -y --no-install-recommends locales openssl unzip gdal-bin wget curl openjdk-11-jdk gettext vim ssh nginx python3 python3-pip\
     && apt clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
-
+    
+RUN RUN pip install --upgrade pip
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 RUN groupadd -g 5000 oim
@@ -172,7 +173,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chmod +x /opt/*.sh && sed -i 's/\r$//' /opt/startup.sh
 RUN chown -R oim.oim /opt/ 
 RUN mkdir /geoserver_scripts
-COPY ./scripts/requirements.txt /geoserver_scripts
+COPY ./scripts/requirements.txt /geoserver_scripts/requirements.txt
 RUN pip install -r /geoserver_scripts/requirements.txt
 
 USER oim
