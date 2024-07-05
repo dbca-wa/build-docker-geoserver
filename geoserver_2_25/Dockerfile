@@ -36,7 +36,7 @@ RUN apt update \
     && apt clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
-
+RUN ls -al /usr/bin/ | grep pip
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
 RUN pip install --upgrade pip
 RUN ln -s /usr/bin/python3 /usr/bin/python
