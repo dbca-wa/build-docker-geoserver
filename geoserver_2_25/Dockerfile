@@ -36,7 +36,7 @@ RUN apt update \
     && apt clean \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
-RUN apt install -y --no-install-recommends  python3 python3-pip python3-setuptools python3-dev
+RUN apt install -y python3 python3-pip python3-setuptools python3-dev
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 RUN groupadd -g 5000 oim
