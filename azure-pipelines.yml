@@ -37,7 +37,7 @@ stages:
       displayName: Dev Build Geoserver 2.27 image and Push
       inputs:
         command: buildAndPush
-        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_28/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_27/Dockerfile'
         tags: | 
               appsteam-geoserver_2_27_latest
               appsteam-geoserver_2_27_$(tagDate)             
