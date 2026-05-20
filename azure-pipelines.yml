@@ -24,7 +24,7 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Dev Build image and Push
+      displayName: Dev Build Geoserver 2.25 image and Push
       inputs:
         command: buildAndPush
         dockerfile: '$(Build.SourcesDirectory)/geoserver_2_25/Dockerfile'
@@ -34,13 +34,24 @@ stages:
         containerRegistry: DockerGitHub
         repository: ghcr.io/dbca-wa/build-docker-geoserver
     - task: Docker@2
-      displayName: Dev Build image and Push
+      displayName: Dev Build Geoserver 2.27 image and Push
       inputs:
         command: buildAndPush
-        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_25/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_28/Dockerfile'
         tags: | 
               appsteam-geoserver_2_27_latest
               appsteam-geoserver_2_27_$(tagDate)             
         containerRegistry: DockerGitHub
+        repository: ghcr.io/dbca-wa/build-docker-geoserver   
+    - task: Docker@2
+      displayName: Dev Build Geoserver 2.28 image and Push
+      inputs:
+        command: buildAndPush
+        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_28/Dockerfile'
+        tags: | 
+              appsteam-geoserver_2_28_latest
+              appsteam-geoserver_2_28_$(tagDate)             
+        containerRegistry: DockerGitHub
         repository: ghcr.io/dbca-wa/build-docker-geoserver        
+             
 
