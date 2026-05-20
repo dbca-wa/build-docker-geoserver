@@ -1,6 +1,6 @@
 FROM ubuntu:24.04 as tomcat
 
-ARG TOMCAT_VERSION=9.0.89
+ARG TOMCAT_VERSION=9.0.113
 ARG CORS_ENABLED=false
 ARG CORS_ALLOWED_ORIGINS=*
 ARG CORS_ALLOWED_METHODS=GET,POST,PUT,DELETE,HEAD,OPTIONS
@@ -73,7 +73,7 @@ RUN apt purge -y  \
 USER oim
 FROM tomcat as download
 
-ARG GS_VERSION=2.25.5
+ARG GS_VERSION=2.27.5
 ARG GS_BUILD=release
 ARG WAR_ZIP_URL=https://downloads.sourceforge.net/project/geoserver/GeoServer/${GS_VERSION}/geoserver-${GS_VERSION}-war.zip
 ENV GEOSERVER_VERSION=$GS_VERSION

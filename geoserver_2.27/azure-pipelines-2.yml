@@ -12,7 +12,7 @@ variables:
   tag: '$(Build.BuildId)'
   tagDate: $[ format('{0:yyyy}.{0:MM}.{0:dd}.{0:HH}.{0:mm}{0:ss}', pipeline.startTime) ]
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-
+  
 stages:
 - stage: Build
   condition: and(succeeded(), eq(variables.isMain, 'true'))
@@ -24,23 +24,15 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Dev Build image and Push
+      displayName: Build an image and Push
       inputs:
         command: buildAndPush
         dockerfile: '$(Build.SourcesDirectory)/geoserver_2_25/Dockerfile'
         tags: | 
-              appsteam-geoserver_2_25_latest
-              appsteam-geoserver_2_25_$(tagDate)              
-        containerRegistry: DockerGitHub
-        repository: ghcr.io/dbca-wa/build-docker-geoserver
-    - task: Docker@2
-      displayName: Dev Build image and Push
-      inputs:
-        command: buildAndPush
-        dockerfile: '$(Build.SourcesDirectory)/geoserver_2_25/Dockerfile'
-        tags: | 
-              appsteam-geoserver_2_27_latest
-              appsteam-geoserver_2_27_$(tagDate)             
-        containerRegistry: DockerGitHub
-        repository: ghcr.io/dbca-wa/build-docker-geoserver        
-
+              latest
+              $(tagDate)_ver2.25
+        containerRegistry: DockerHub
+        repository: dbcawa/appsteam-geoserver
+      env:
+        DOCKER_BUILDKIT: 1
+        repository: dbcawa/docker_app_dev       
