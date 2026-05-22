@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 as tomcat
+FROM ubuntu:26.04 as tomcat
 
 ARG TOMCAT_VERSION=9.0.113
 ARG CORS_ENABLED=false
