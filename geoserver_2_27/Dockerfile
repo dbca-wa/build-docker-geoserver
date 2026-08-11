@@ -173,6 +173,8 @@ RUN chown -R oim.oim /opt/
 RUN mkdir /geoserver_scripts
 COPY ./scripts/* /geoserver_scripts/
 
+RUN apt purge -y linux-libc-dev
+
 USER oim
 ENTRYPOINT ["bash", "/opt/startup.sh"]
 
